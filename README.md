@@ -33,7 +33,7 @@ jobs:
           fetch-depth: 0
 
       - name: Verify migrations sync
-        uses: your-org/ensure-migrations-up-to-date@v1
+        uses: athecoder/ensure-migrations-up-to-date@v2.0
         with:
           migrations-dir: 'db/migrations/'      # override if your migrations live elsewhere
           compare-branch: 'main'                # override if not using 'staging'
@@ -44,7 +44,7 @@ jobs:
 ```yaml
 steps:
   - uses: actions/checkout@v4
-  - uses: your-org/ensure-migrations-up-to-date@v1
+  - uses: athecoder/ensure-migrations-up-to-date@v2.0
 ```
 
 ## Output
@@ -94,7 +94,7 @@ jobs:
           fetch-depth: 0
 
       - name: Verify migrations sync
-        uses: your-org/ensure-migrations-up-to-date@v1
+        uses: athecoder/ensure-migrations-up-to-date@v2.0
         with:
           migrations-dir: 'db/migrations/'      # override if your migrations live elsewhere
           compare-branch: 'main'                # override if not using 'staging'
@@ -105,7 +105,7 @@ jobs:
 ```yaml
 steps:
   - uses: actions/checkout@v4
-  - uses: your-org/ensure-migrations-up-to-date@v1
+  - uses: athecoder/ensure-migrations-up-to-date@v2.0
 ```
 
 ## Output
