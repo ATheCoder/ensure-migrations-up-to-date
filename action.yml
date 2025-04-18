@@ -1,0 +1,38 @@
+name: 'Ensure Migrations Up‑to‑Date'
+description: >
+  Fails if the specified branch has migrations not present in the current branch.
+author: Your Name <you@example.com>
+
+inputs:
+  migrations-dir:
+    description: 'Path to the migrations folder'
+    required: false
+    default: 'src/migrations/'
+  compare-branch:
+    description: 'Branch to compare against'
+    required: false
+    default: 'staging'
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Fetch compare branch
+      shell: bash
+      run: git fetch origin ${{ inputs.compare-branch }}:${{ inputs.compare-branch }}
+
+    - name: Check for missing migrations
+      shell: bash
+      run: |
+        MISSING=$(git diff --name-only --diff-filter=A \
+          HEAD..origin/${{ inputs.compare-branch }} -- "${{ inputs.migrations-dir }}")
+        if [ -n "$MISSING" ]; then
+          echo "❌  These migrations exist in '${{ inputs.compare-branch }}' but not in this branch:"
+          echo "$MISSING"
+          exit 1
+        fi
+        echo "✅  All migrations from '${{ inputs.compare-branch }}' are present."
