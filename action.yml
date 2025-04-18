@@ -2,6 +2,9 @@ name: 'Ensure Migrations Up‑to‑Date'
 description: >
   Fails if the specified branch has migrations not present in the current branch.
 author: Your Name <you@example.com>
+branding:
+  icon: database
+  color: yellow
 
 inputs:
   migrations-dir:
